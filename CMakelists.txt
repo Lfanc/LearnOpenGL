@@ -1,0 +1,65 @@
+cmake_minimum_required(VERSION 3.15)
+project(OpenGL_Learning)
+
+# 1. 设置 C++ 标准
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# 2. 如果你的 vcpkg 没有设置全局环境变量，在这里指定你的 vcpkg 工具链路径
+# 如果设置了 VCPKG_ROOT 环境变量，这行可以注释掉
+# set(CMAKE_TOOLCHAIN_FILE "vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+
+# 3. 查找依赖库（利用 vcpkg 或系统安装）
+find_package(OpenGL REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)  
+find_package(glad CONFIG REQUIRED)
+find_package(Stb REQUIRED)
+
+# 4. 核心库（静态库）
+add_library(ogl_core STATIC
+    src/core/Window.cpp
+    src/core/shader.cpp
+    src/core/Texture.cpp
+    # src/core/Mesh.cpp
+)
+
+# 5. 为核心库指定头文件搜索路径
+target_include_directories(ogl_core PUBLIC ${CMAKE_SOURCE_DIR}/src)
+# 核心库依赖第三方库
+#    stb 是纯头文件库，没有 .lib 可链接，只需把它的 include 路径
+#    以 PUBLIC 的形式传下去，所有链接 ogl_core 的示例自动继承
+target_include_directories(ogl_core PUBLIC ${Stb_INCLUDE_DIR})
+
+# 6. 链接核心库所需的第三方库
+target_link_libraries(ogl_core
+    PUBLIC
+    OpenGL::GL
+    glfw
+    glm::glm
+    glad::glad
+)
+
+# 7. 自动生成所有示例的可执行文件
+# file(GLOB EXAMPLE_SOURCES "src/examples/*.cpp")
+# foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+#     get_filename_component(EXAMPLE_TARGET ${EXAMPLE_SOURCE} NAME_WE)
+#     add_executable(${EXAMPLE_TARGET} ${EXAMPLE_SOURCE})
+#     target_link_libraries(${EXAMPLE_TARGET} PRIVATE ogl_core)
+# endforeach()
+
+# ============================================
+# 7. 辅助宏：添加一个示例，自动链接 ogl_core
+# ============================================
+function(add_example TARGET_NAME SOURCE_FILE)
+    add_executable(${TARGET_NAME} ${SOURCE_FILE})
+    target_link_libraries(${TARGET_NAME} PRIVATE ogl_core)
+endfunction()
+
+
+# add_example(01_hello_window    src/examples/GettingStarted/hello_window.cpp)
+# add_example(02_hello_triangle    src/examples/GettingStarted/hello_triangle.cpp)
+# add_example(03_hello_shaders    src/examples/GettingStarted/hello_shaders.cpp)
+# add_example(04_textures          src/examples/GettingStarted/textureChapter.cpp)
+# add_example(05_transformations   src/examples/GettingStarted/transformChapter.cpp)
+add_example(06_coordinateSystems   src/examples/GettingStarted/coordinateChapter.cpp)

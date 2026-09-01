@@ -1,0 +1,11 @@
+{
+  "name": "learn-opengl",
+  "version": "0.1.0",
+  "dependencies": [
+    "glfw3",
+    "glad",
+    "glm",
+    "stb"
+  ],
+  "builtin-baseline": "f1d4bbc72f183441403ba5107cb19d75a5abc2a2"
+}
