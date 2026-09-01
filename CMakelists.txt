@@ -21,6 +21,7 @@ add_library(ogl_core STATIC
     src/core/Window.cpp
     src/core/shader.cpp
     src/core/Texture.cpp
+    src/core/camera.h
     # src/core/Mesh.cpp
 )
 
@@ -62,4 +63,5 @@ endfunction()
 # add_example(03_hello_shaders    src/examples/GettingStarted/hello_shaders.cpp)
 # add_example(04_textures          src/examples/GettingStarted/textureChapter.cpp)
 # add_example(05_transformations   src/examples/GettingStarted/transformChapter.cpp)
-add_example(06_coordinateSystems   src/examples/GettingStarted/coordinateChapter.cpp)
+# add_example(06_coordinateSystems   src/examples/GettingStarted/coordinateChapter.cpp)
+add_example(07_camera   src/examples/GettingStarted/cameraChapter.cpp)
