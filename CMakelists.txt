@@ -4,6 +4,8 @@ project(OpenGL_Learning)
 # 1. 设置 C++ 标准
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# 设置字符串编码，避免中文乱码
+set(CMAKE_MSG_ENCODING UTF-8)
 
 # 2. 如果你的 vcpkg 没有设置全局环境变量，在这里指定你的 vcpkg 工具链路径
 # 如果设置了 VCPKG_ROOT 环境变量，这行可以注释掉
@@ -64,4 +66,5 @@ endfunction()
 # add_example(04_textures          src/examples/GettingStarted/textureChapter.cpp)
 # add_example(05_transformations   src/examples/GettingStarted/transformChapter.cpp)
 # add_example(06_coordinateSystems   src/examples/GettingStarted/coordinateChapter.cpp)
-add_example(07_camera   src/examples/GettingStarted/cameraChapter.cpp)
+# add_example(07_camera   src/examples/GettingStarted/cameraChapter.cpp)
+add_example(08_color   src/examples/Lighting/colorChapter.cpp)
