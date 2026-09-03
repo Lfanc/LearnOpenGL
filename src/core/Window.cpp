@@ -1,16 +1,13 @@
 #include "Window.h"
 
-
-
-
-GLFWwindow* configuration_window() {
+GLFWwindow* configuration_window(int width, int height) {
     // 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -25,7 +22,7 @@ GLFWwindow* configuration_window() {
         return NULL;
     }
     // 前两个参数控制窗口左下角的位置。第三个和第四个参数控制渲染窗口的宽度和高度（像素）。
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, width, height);
 
     return window;
 }
