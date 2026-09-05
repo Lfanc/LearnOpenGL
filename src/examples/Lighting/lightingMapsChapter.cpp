@@ -263,7 +263,7 @@ int main() {
         lightingShader.setVec3("lightPos", lightPos);
         lightingShader.setVec3("viewPos", camera.Position);
         // 材质
-        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        //lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
         lightingShader.setFloat("material.shininess", 32.0f);
         // 纹理
         lightingShader.setInt("material.diffuse", 0);
