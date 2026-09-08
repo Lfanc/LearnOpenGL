@@ -17,6 +17,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)  
 find_package(glad CONFIG REQUIRED)
 find_package(Stb REQUIRED)
+find_package(assimp CONFIG REQUIRED)
 
 # 4. 核心库（静态库）
 add_library(ogl_core STATIC
@@ -24,11 +25,15 @@ add_library(ogl_core STATIC
     src/core/shader.cpp
     src/core/Texture.cpp
     src/core/camera.h
-    # src/core/Mesh.cpp
+    src/core/mesh.h
+    src/core/model.h
 )
 
 # 5. 为核心库指定头文件搜索路径
-target_include_directories(ogl_core PUBLIC ${CMAKE_SOURCE_DIR}/src)
+target_include_directories(ogl_core PUBLIC
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/src/core
+)
 # 核心库依赖第三方库
 #    stb 是纯头文件库，没有 .lib 可链接，只需把它的 include 路径
 #    以 PUBLIC 的形式传下去，所有链接 ogl_core 的示例自动继承
@@ -41,6 +46,7 @@ target_link_libraries(ogl_core
     glfw
     glm::glm
     glad::glad
+    assimp::assimp
 )
 
 # 7. 自动生成所有示例的可执行文件
@@ -72,4 +78,5 @@ endfunction()
 # add_example(10_materials   src/examples/Lighting/materialChapter.cpp)
 # add_example(11_lightingMaps   src/examples/Lighting/lightingMapsChapter.cpp)
 # add_example(12_lightCasters   src/examples/Lighting/lightCastersChapter.cpp)
-add_example(13_multipleLights   src/examples/Lighting/multipleLightsChapter.cpp)
+# add_example(13_multipleLights   src/examples/Lighting/multipleLightsChapter.cpp)
+add_example(14_modelLoading   src/examples/ModelLoading/modelChapter.cpp)
