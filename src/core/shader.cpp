@@ -161,7 +161,7 @@ Shader::Shader(const char* vertexPath, const char* geometryPath, const char* fra
     if (!success)
     {
         glGetShaderInfoLog(vertex, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED" << infoLog << std::endl;
     };
 
     // 着色器程序
